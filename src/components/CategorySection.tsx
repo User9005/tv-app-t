@@ -57,7 +57,7 @@ const CategorySection = ({
                     <div
                         key={movie.Id}
                         style={{minWidth: String(cardwidth) + "px"}}
-                        className={`h-auto max-sm:w-[50vw] cursor-pointer`}
+                        className={`h-auto max-sm:w-[50vw] cursor-pointer transform transition duration-300 ease-in-out hover:scale-105 hover:brightness-110`}
                         onClick={() => {onChange(movie); scrollTo(0,0);}}
                     >
                         <img

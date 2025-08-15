@@ -19,7 +19,7 @@ const MainMenu = () => {
                     bg-gradient-to-r from-[#040404] to-[#040404]/80
                     fixed top-0 left-0 z-50 h-full overflow-hidden
                     ${sidebarOpen ? 'w-[250px]' : 'w-0'}        
-                    text-white transition-all duration-400 ease-in-out
+                    text-white transition-all duration-240 ease-in-out
                     md:group-hover:w-[300px]
                     md:w-[160px] lg:w-[180px] xl:w-[200px] md:overflow-visible
                     xl:group-hover:w-[360px]

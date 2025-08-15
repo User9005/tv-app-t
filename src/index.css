@@ -71,7 +71,7 @@ body {
 
 
     .sidebarItem {
-        @apply flex items-center gap-4 rounded-md overflow-hidden transition-colors duration-200 hover:bg-primary-dull hover:scale-105 w-[200px] h-[56px] text-[18px] px-3 py-2 sm:w-[220px] sm:h-[60px] sm:text-[20px] md:w-[260px] md:h-[64px] md:text-[22px] lg:w-[280px] lg:h-[68px] lg:text-[24px] xl:w-[320px] xl:h-[72px] xl:text-[28px];
+        @apply flex items-center gap-4 rounded-md overflow-hidden transition-colors duration-300 hover:bg-primary-dull hover:scale-105 w-[200px] h-[56px] text-[18px] px-3 py-2 sm:w-[220px] sm:h-[60px] sm:text-[20px] md:w-[260px] md:h-[64px] md:text-[22px] lg:w-[280px] lg:h-[68px] lg:text-[24px] xl:w-[320px] xl:h-[72px] xl:text-[28px];
     }
 
 
