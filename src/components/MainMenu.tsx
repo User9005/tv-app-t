@@ -10,14 +10,14 @@ const MainMenu = () => {
     const toggleSidebar = () => {
         setSidebarOpen(prev => !prev);
     }
-
+ 
     return (
         <>
             <div className="group relative h-full ">
                 <div
                     className={`
                     bg-gradient-to-r from-[#040404] to-[#040404]/80
-                    fixed top-0 left-0  z-50 h-screen overflow-hidden
+                    fixed top-0 left-0  z-50 h-screen overflow-y-auto
                     ${sidebarOpen ? 'w-[250px]' : 'w-0'}        
                     text-white transition-all duration-240 ease-in-out
                     md:group-hover:w-[300px]
