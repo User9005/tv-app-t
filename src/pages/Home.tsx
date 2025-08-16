@@ -10,7 +10,7 @@ const Home = () => {
     const [storedMovieIds] = useState<number[]>(
         JSON.parse(sessionStorage.getItem("selectedMovieIds") || "[]")
     );
-    const [clickedMovieId, setClickedMovieId] = useState<number | null>(
+    const [clickedMovieId, setClickedMovieId] = useState<number>(
         storedMovieIds.length > 0 ? storedMovieIds[0] : 1232546
     );
     const [showMovie, setShowMovie] = useState<boolean>(false);
@@ -57,8 +57,6 @@ const Home = () => {
                 movie={featuredMovie}
                 showMovie={showMovie}
                 setShowMovie={setShowMovie}
-
-
             />
             <CategorySection
                 categoryTitle="Trending Now"

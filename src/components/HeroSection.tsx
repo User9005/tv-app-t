@@ -76,12 +76,13 @@ const HeroSection = ({
                     />
                 ) : (
                     <h1 className="movie-title">
-                        <span className={`${moviTitle.length === 1 ? "text-4xl max-sm:text-3xl" : "text-3xl max-sm:text-2xl"} font-medium`}>
-                            {moviTitle[0]}
+                        <span className="text-3xl max-sm:text-3xl font-medium">
+                            {moviTitle[0]} {" "}
                         </span>
-                        <span className="text-3xl font-semibold">
+                        {moviTitle.length > 1 &&
+                        <span className="text-4xl font-semibold">
                             {moviTitle.slice(1).join(" ")}
-                        </span>
+                        </span>}
                     </h1>
                 )}
 
@@ -91,7 +92,7 @@ const HeroSection = ({
                     <span>{getMovieTime(movie.Duration)}</span>
                 </div>
 
-                <p className="movie-description">{movie.Description.slice(0, 50)}...</p>
+                <p className="movie-description">{movie.Description.slice(0, 150)}...</p>
 
                 {/* Buttons */}
                 <div className="flex items-center gap-6 max-sm:flex-col-reverse">
@@ -99,7 +100,7 @@ const HeroSection = ({
                         onClick={() => setShowMovie(true)}
                         className="button-base button-primary flex items-center"
                     >
-                        <PlayIcon className="max-sm:w-5 max-sm:h-5 w-6 h-6 fill-[#0C0C0C]" /> Play
+                        <PlayIcon className="max-sm:w-4.5 max-sm:h-4.5 sm:w-5 sm:h-5 w-6 h-6 fill-[#0C0C0C]" /> Play
                     </button>
 
                     <button
