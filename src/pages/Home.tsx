@@ -3,7 +3,7 @@ import HeroSection from '../components/HeroSection';
 import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
 import CategorySection from '../components/CategorySection';
-import useCategorySort from '../lib/useCategorySort';
+import useCategorySort from '../hooks/useCategorySort';
 
 const Home = () => {
     const [movies] = useState<MovieData>(moviesData);
