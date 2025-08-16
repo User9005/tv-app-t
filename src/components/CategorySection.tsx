@@ -40,9 +40,9 @@ const CategorySection = ({
     }, [visibleItems]);
 
     return (
-        <div className="relative z-20 px-4 md:px-12 lg:px-24 sm:mt-[-300px] md:mt[200px] w-full" >
+        <div className="relative z-20 px-4 md:px-12 sm:px-[90px] md:px-24 sm:mt-[-300px] md:mt[200px] w-full" >
             <h1 className="text-secondary sm:text-2xl md:text-3xl text-[32px] font-semibold mb-4 max-sm:text-center
-            max-sm:my-10 max-md:mx-4 relative"
+            max-sm:my-10 relative"
             >{categoryTitle}</h1>
 
             <div ref={carouselRef}

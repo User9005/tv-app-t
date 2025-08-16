@@ -64,8 +64,8 @@ const HeroSection = ({
                     backgroundImage: movie.Backdrop_path
                         ? `url(${movie.Backdrop_path})`
                         : 'url("/FeaturedCoverImage.png")',
-                }}
-            >
+                }}>
+                    
                 <h1 className="movie-category">{movie.Category}</h1>
 
                 {movie.Id === 986056 ? (
