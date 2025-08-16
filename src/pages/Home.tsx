@@ -22,7 +22,7 @@ const Home = () => {
 
 
 
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     function handleMovieSelect(movie: MovieType) {
         const stored = sessionStorage.getItem('selectedMovieIds');
