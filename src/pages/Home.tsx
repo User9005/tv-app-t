@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
@@ -20,7 +20,9 @@ const Home = () => {
     const featuredMovie = trendingMovies.find(movie => movie.Id === clickedMovieId) ?? null;
     const visibleItems: number = 8.5;
 
-    
+
+
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     function handleMovieSelect(movie: MovieType) {
         const stored = sessionStorage.getItem('selectedMovieIds');
@@ -35,8 +37,15 @@ const Home = () => {
         sessionStorage.setItem('selectedMovieIds', JSON.stringify(selectedMovieIds));
         setClickedMovieId(movie.Id);
 
-        setTimeout(() => {
+        setShowMovie(false);
+
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
             setShowMovie(true);
+            timeoutRef.current = null;
         }, 2000);
     }
 

@@ -76,7 +76,7 @@ body {
 
 
     .sidebarFooter {
-        @apply absolute bottom-[59px] left-[40px] flex flex-col gap-2 font-bold text-[#858688] leading-[36px] tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px];
+        @apply absolute bottom-[59px] max-sm:bottom-[20px] max-md:bottom-[24px] left-[40px] flex flex-col gap-2 font-bold text-[#858688] leading-[36px] tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px];
     }
 }
 

@@ -17,7 +17,7 @@ const MainMenu = () => {
                 <div
                     className={`
                     bg-gradient-to-r from-[#040404] to-[#040404]/80
-                    fixed top-0 left-0 z-50 h-full overflow-hidden
+                    fixed top-0 left-0  z-50 h-screen overflow-hidden
                     ${sidebarOpen ? 'w-[250px]' : 'w-0'}        
                     text-white transition-all duration-240 ease-in-out
                     md:group-hover:w-[300px]
@@ -28,7 +28,7 @@ const MainMenu = () => {
                     `}
                     >
 
-                    <div className="h-full flex flex-col px-4 py-6">
+                    <div className="h-full flex flex-col px-4">
                         {/* Profile */}
                         <div className={`sidebarHeader ${sidebarOpen && "opacity-100 transition-opacity duration-1000"} md:mb-[47px]`}>
                             <img
@@ -47,7 +47,7 @@ const MainMenu = () => {
                             ))}
                         </div>
 
-                        {/* Footer links (bottom aligned) */}
+                        {/* Footer links  */}
                         <div className={`sidebarFooter ${sidebarOpen && "opacity-100 transition-opacity duration-300"}`}>
                             <Link onClick={()=>{setSidebarOpen(false)}} to="/language">Language</Link>
                             <Link onClick={()=>{setSidebarOpen(false)}} to="/privacy">Privacy</Link>
