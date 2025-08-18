@@ -4,6 +4,7 @@ import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
 import CategorySection from '../components/CategorySection';
 import useCategorySort from '../hooks/useCategorySort';
+import useDebouncedVisible from '../hooks/useDebouncedVisible';
 
 const Home = () => {
     const [movies] = useState<MovieData>(moviesData);
@@ -13,7 +14,7 @@ const Home = () => {
     const [clickedMovieId, setClickedMovieId] = useState<number>(
         storedMovieIds.length > 0 ? storedMovieIds[0] : 1232546
     );
-    const [showMovie, setShowMovie] = useState<boolean>(false);
+    const [showMovie, showMovieNow, hideMovie, hideMovieThenShow] = useDebouncedVisible(false, 2000);
 
     const trendingMovies = movies.TrendingNow;
     const { movies: sortedTrendingMovies } = useCategorySort(trendingMovies, storedMovieIds);
@@ -21,32 +22,18 @@ const Home = () => {
     const visibleItems: number = 8.5;
 
 
-
-    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
     function handleMovieSelect(movie: MovieType) {
         const stored = sessionStorage.getItem('selectedMovieIds');
         let selectedMovieIds = stored ? JSON.parse(stored) : [];
-
         selectedMovieIds = selectedMovieIds.filter((id: number) => id !== movie.Id);
-
         selectedMovieIds.unshift(movie.Id);
-
         selectedMovieIds = selectedMovieIds.slice(0, 20);
 
         sessionStorage.setItem('selectedMovieIds', JSON.stringify(selectedMovieIds));
+
         setClickedMovieId(movie.Id);
 
-        setShowMovie(false);
-
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-
-        timeoutRef.current = setTimeout(() => {
-            setShowMovie(true);
-            timeoutRef.current = null;
-        }, 2000);
+        hideMovieThenShow()
     }
 
     return (
@@ -56,7 +43,8 @@ const Home = () => {
             <HeroSection
                 movie={featuredMovie}
                 showMovie={showMovie}
-                setShowMovie={setShowMovie}
+                closeMovie={hideMovie}
+                playMovie={() => showMovieNow()}
             />
             <CategorySection
                 categoryTitle="Trending Now"

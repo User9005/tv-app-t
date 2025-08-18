@@ -11,11 +11,13 @@ import { getMovieTitle } from "../lib/getMovieTitle";
 const HeroSection = ({
     movie,
     showMovie,
-    setShowMovie
+    closeMovie,
+    playMovie
 }: {
     movie: MovieType | null;
     showMovie: boolean;
-    setShowMovie: (value: boolean) => void;
+    closeMovie:()=>void;
+    playMovie: ()=>void;
 }) => {
 
     if (!movie) return null;
@@ -30,6 +32,9 @@ const HeroSection = ({
         };
     }, [showMovie]);
 
+    console.log(showMovie);
+    
+
     if (showMovie) {
         if (!movie.VideoUrl) {
             return <div>No video available</div>;
@@ -38,7 +43,7 @@ const HeroSection = ({
         return (
             <section className="w-full h-screen bg-black">
                 <button
-                    onClick={() => setShowMovie(false)}
+                    onClick={() => closeMovie()}
                     className="absolute top-4 left-4 z-50 backdrop-blur-md p-2 rounded-full text-white cursor-pointer"
                 >
                     <ArrowLeft className="w-6 h-6" />
@@ -97,10 +102,10 @@ const HeroSection = ({
                 {/* Buttons */}
                 <div className="flex items-center gap-6 max-sm:flex-col-reverse">
                     <button
-                        onClick={() => setShowMovie(true)}
+                        onClick={() => playMovie()}
                         className="button-base button-primary flex items-center"
                     >
-                        <PlayIcon className="max-sm:w-4.5 max-sm:h-4.5 sm:w-5 sm:h-5 w-6 h-6 fill-[#0C0C0C]" /> Play
+                        <PlayIcon className="max-sm:w-4.5 max-sm:h-4.5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7  fill-[#0C0C0C]" /> Play
                     </button>
 
                     <button
@@ -112,6 +117,7 @@ const HeroSection = ({
                 </div>
 
             </div>
+
         </section>
     );
 };
