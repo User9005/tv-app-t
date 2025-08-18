@@ -2,11 +2,24 @@ import { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
-import CategorySection from '../components/CategorySection';
+// import CategorySection from '../components/CategorySection';
 import useCategorySort from '../hooks/useCategorySort';
-import useDebouncedVisible from '../hooks/useDebouncedVisible';
+import CategorySection from '../components/CategorySection';
 
-const Home = () => {
+type HomeProps = {
+    showMovie: boolean;
+    showMovieNow: () => void;
+    hideMovie: () => void;
+    triggerDelayedShow: () => void;
+  };
+
+const Home = (
+    {
+      showMovie,
+      showMovieNow,
+      hideMovie,
+      triggerDelayedShow
+    } :  HomeProps ) => {
     const [movies] = useState<MovieData>(moviesData);
     const [storedMovieIds] = useState<number[]>(
         JSON.parse(sessionStorage.getItem("selectedMovieIds") || "[]")
@@ -14,7 +27,6 @@ const Home = () => {
     const [clickedMovieId, setClickedMovieId] = useState<number>(
         storedMovieIds.length > 0 ? storedMovieIds[0] : 1232546
     );
-    const [showMovie, showMovieNow, hideMovie, triggerDelayedShow] = useDebouncedVisible(false, 2000);
 
     const trendingMovies = movies.TrendingNow;
     const { movies: sortedTrendingMovies } = useCategorySort(trendingMovies, storedMovieIds);
@@ -37,7 +49,7 @@ const Home = () => {
     }
 
     return (
-        <div className='md:pl-[160px] lg:pl-[180px] xl:pl-[200px] className="w-full min-h-screen"'>
+        <div className={`${showMovie ? "pl-0" : "md:pl-[160px] lg:pl-[180px] xl:pl-[200px]"}`}>
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/60
              via-transparent to-transparent z-0"></div>
             <HeroSection
@@ -45,13 +57,32 @@ const Home = () => {
                 showMovie={showMovie}
                 closeMovie={hideMovie}
                 playMovie={() => showMovieNow()}
-            />
-            <CategorySection
                 categoryTitle="Trending Now"
                 categoryMovies={sortedTrendingMovies}
                 onChange={handleMovieSelect}
                 visibleItems={visibleItems}
             />
+
+            <div>
+            <CategorySection
+                categoryTitle="Popular"
+                categoryMovies={sortedTrendingMovies}
+                onChange={handleMovieSelect}
+                visibleItems={visibleItems}
+            />
+            <CategorySection
+                categoryTitle="Upcoming"
+                categoryMovies={sortedTrendingMovies}
+                onChange={handleMovieSelect}
+                visibleItems={visibleItems}
+            />
+            <CategorySection
+                categoryTitle="Top Picks For You"
+                categoryMovies={sortedTrendingMovies}
+                onChange={handleMovieSelect}
+                visibleItems={visibleItems}
+            />
+            </div>
         </div>
     );
 };

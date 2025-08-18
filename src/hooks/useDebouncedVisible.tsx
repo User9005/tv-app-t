@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-function useDebouncedVisible(initial = false, delay = 2000) {
+function useDebouncedVisible( initial: boolean = false, delay: number = 2000) {
     const [visible, setVisible] = useState(initial);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
