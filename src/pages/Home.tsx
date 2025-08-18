@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
