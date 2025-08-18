@@ -32,9 +32,6 @@ const HeroSection = ({
         };
     }, [showMovie]);
 
-    console.log(showMovie);
-    
-
     if (showMovie) {
         if (!movie.VideoUrl) {
             return <div>No video available</div>;

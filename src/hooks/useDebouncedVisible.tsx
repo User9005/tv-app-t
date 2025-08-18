@@ -14,7 +14,7 @@ function useDebouncedVisible(initial = false, delay = 2000) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     }
   
-    function hideThenShow() {
+    function triggerDelayedShow() {
       hide();
       timeoutRef.current = setTimeout(() => {
         setVisible(true);
@@ -28,7 +28,7 @@ function useDebouncedVisible(initial = false, delay = 2000) {
       };
     }, []);
   
-    return [visible, show, hide, hideThenShow] as const;
+    return [visible, show, hide, triggerDelayedShow] as const;
   }
   
 export default useDebouncedVisible;

@@ -14,7 +14,7 @@ const Home = () => {
     const [clickedMovieId, setClickedMovieId] = useState<number>(
         storedMovieIds.length > 0 ? storedMovieIds[0] : 1232546
     );
-    const [showMovie, showMovieNow, hideMovie, hideMovieThenShow] = useDebouncedVisible(false, 2000);
+    const [showMovie, showMovieNow, hideMovie, triggerDelayedShow] = useDebouncedVisible(false, 2000);
 
     const trendingMovies = movies.TrendingNow;
     const { movies: sortedTrendingMovies } = useCategorySort(trendingMovies, storedMovieIds);
@@ -33,7 +33,7 @@ const Home = () => {
 
         setClickedMovieId(movie.Id);
 
-        hideMovieThenShow()
+        triggerDelayedShow()
     }
 
     return (
