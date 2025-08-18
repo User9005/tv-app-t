@@ -7,17 +7,26 @@ import { assets } from "../assets/assets";
 import ReactPlayer from "react-player";
 import { useEffect } from "react";
 import { getMovieTitle } from "../lib/getMovieTitle";
+import CategorySection from "./CategorySection";
 
 const HeroSection = ({
     movie,
     showMovie,
     closeMovie,
-    playMovie
+    playMovie,
+    categoryTitle,
+    categoryMovies,
+    onChange,
+    visibleItems
 }: {
     movie: MovieType | null;
     showMovie: boolean;
-    closeMovie:()=>void;
-    playMovie: ()=>void;
+    closeMovie: () => void;
+    playMovie: () => void;
+    categoryTitle: string;
+    categoryMovies: MovieType[];
+    onChange: (movie: MovieType) => void;
+    visibleItems: number;
 }) => {
 
     if (!movie) return null;
@@ -32,45 +41,48 @@ const HeroSection = ({
         };
     }, [showMovie]);
 
-    console.log(showMovie);
-    
-
     if (showMovie) {
         if (!movie.VideoUrl) {
             return <div>No video available</div>;
         }
 
         return (
-            <section className="w-full h-screen bg-black">
+            <section className={`h-screen bg-black transition-all duration-300 ease-in-out ${showMovie ? "ml-0 w-full" : " ml-[200px]"} sm:ml-0`} >
                 <button
                     onClick={() => closeMovie()}
                     className="absolute top-4 left-4 z-50 backdrop-blur-md p-2 rounded-full text-white cursor-pointer"
                 >
                     <ArrowLeft className="w-6 h-6" />
                 </button>
-                <ReactPlayer
-                    src={movie.VideoUrl}
-                    playing={true}
-                    controls={false}
-                    width="100%"
-                    height="100%"
-                    style={{ objectFit: "cover" }}
-                />
+
+                    <ReactPlayer
+                        src={movie.VideoUrl}
+                        playing={true}
+                        controls={false}
+                        width="100%"
+                        height="100%"
+                        style={{ objectFit: "cover" }}
+                    />
             </section>
         );
     }
 
     return (
-        <section className="relative w-full h-screen overflow-hidden hero-image">
-        <div className="fixed top-0 left-0 w-full h-screen pointer-events-none bg-gradient-to-b from-[#0C0C0C] to-transparent opacity-40 z-0" />
+        <section className="relative w-full min-h-screen hero-image flex flex-col justify-start">
+            <div className="fixed top-0 left-0 w-full h-screen pointer-events-none bg-gradient-to-b from-[#0C0C0C] to-transparent opacity-40 z-0" />
 
-            <div className="hero-body z-10 absolute inset-0 bg-cover bg-center bg-no-repeat"
+            <div className="hero-body z-10 bg-cover bg-center bg-no-repeat w-full min-h-screen
+                         px-4 pt-[100px] 
+                         sm:px-[90px] 
+                         md:px-24 md:pt-[130px] 
+                         lg:px-24 lg:pt-[168px]
+            "
                 style={{
                     backgroundImage: movie.Backdrop_path
                         ? `url(${movie.Backdrop_path})`
                         : 'url("/FeaturedCoverImage.png")',
                 }}>
-                    
+
                 <h1 className="movie-category">{movie.Category}</h1>
 
                 {movie.Id === 986056 ? (
@@ -85,9 +97,9 @@ const HeroSection = ({
                             {moviTitle[0]} {" "}
                         </span>
                         {moviTitle.length > 1 &&
-                        <span className="text-4xl font-semibold">
-                            {moviTitle.slice(1).join(" ")}
-                        </span>}
+                            <span className="text-4xl font-semibold">
+                                {moviTitle.slice(1).join(" ")}
+                            </span>}
                     </h1>
                 )}
 
@@ -100,7 +112,7 @@ const HeroSection = ({
                 <p className="movie-description">{movie.Description.slice(0, 150)}...</p>
 
                 {/* Buttons */}
-                <div className="flex items-center gap-6 max-sm:flex-col-reverse">
+                <div className="flex items-center gap-6">
                     <button
                         onClick={() => playMovie()}
                         className="button-base button-primary flex items-center"
@@ -116,6 +128,12 @@ const HeroSection = ({
                     </button>
                 </div>
 
+                <CategorySection
+                    categoryTitle={categoryTitle}
+                    categoryMovies={categoryMovies}
+                    onChange={onChange}
+                    visibleItems={visibleItems}
+                />
             </div>
 
         </section>

@@ -13,7 +13,7 @@ const CategorySection = ({
     visibleItems: number
 }) => {
 
-    const [cardwidth, setCardWidth] = useState<number>(200);
+    const [cardSize, setCardSize] = useState<number>(200);
     const carouselRef = useRef<HTMLDivElement | null>(null);
 
     useLayoutEffect(() => {
@@ -29,7 +29,7 @@ const CategorySection = ({
                 const totalGap = gap * (visibleItems - 1);
                 const totalWidth = container.clientWidth - paddingLeft - paddingRight - totalGap;
 
-                setCardWidth(totalWidth / visibleItems);
+                setCardSize(totalWidth / visibleItems);
             }
         };
 
@@ -40,20 +40,19 @@ const CategorySection = ({
     }, [visibleItems]);
 
     return (
-        <div className="relative z-20 px-4 md:px-12 sm:px-[90px] md:px-24 sm:mt-[-300px] md:mt[200px] w-full" >
-            <h1 className="text-secondary sm:text-2xl md:text-3xl text-[32px] font-semibold mb-4 max-sm:text-center
-            max-sm:my-10 relative"
-            >{categoryTitle}</h1>
+        <div className={`relative z-20 w-full mt-8 sm:mt-12 md:mt-16 lg:mt-20 ${categoryTitle === "Trending Now" ? "max-sm:mt-50 sm:mt-90 md:mt-60 lg:pb-10" : ""}`} >
+            <h1 className="text-secondary sm:text-2xl md:text-3xl text-[32px] font-semibold mb-4  max-sm:text-xl max-sm:my-10 relative">
+            {categoryTitle}</h1>
 
             <div ref={carouselRef}
-                className="flex flex-col gap-4 no-scrollbar max-sm:justify-center sm:flex-row items-center
+                className="flex gap-4 no-scrollbar items-center
                 overflow-x-scroll scroll-smooth w-full"
                 style={{ scrollbarWidth: 'none' }}
                 >
                 {categoryMovies.slice(0,50).map((movie) => (
                     <div
                         key={movie.Id}
-                        style={{minWidth: String(cardwidth) + "px"}}
+                        style={{minWidth: String(cardSize) + "px"}}
                         className={`h-auto max-sm:rounded-lg rounded-md overflow-hidden max-sm:w-[40vw] cursor-pointer`}
                         onClick={() => {onChange(movie); scrollTo(0,0);}}
                     >
