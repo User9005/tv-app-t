@@ -32,7 +32,6 @@ const HeroSection = ({
     if (!movie) return null;
 
     const navigate = useNavigate();
-    const moviTitle = getMovieTitle(movie?.Title || "");
 
     useEffect(() => {
         document.body.style.overflow = showMovie ? "hidden" : "auto";
@@ -92,15 +91,7 @@ const HeroSection = ({
                         className="max-h-11 lg:h-11"
                     />
                 ) : (
-                    <h1 className="movie-title">
-                        <span className="text-3xl max-sm:text-3xl font-medium">
-                            {moviTitle[0]} {" "}
-                        </span>
-                        {moviTitle.length > 1 &&
-                            <span className="text-4xl font-semibold">
-                                {moviTitle.slice(1).join(" ")}
-                            </span>}
-                    </h1>
+                    <h1 className="movie-title">{getMovieTitle(movie.Title)}</h1>
                 )}
 
                 <div className="movie-meta">

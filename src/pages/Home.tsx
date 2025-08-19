@@ -2,9 +2,7 @@ import { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import { moviesData } from '../assets/assets'
 import type { MovieData, MovieType } from '../types';
-// import CategorySection from '../components/CategorySection';
 import useCategorySort from '../hooks/useCategorySort';
-import CategorySection from '../components/CategorySection';
 
 type HomeProps = {
     showMovie: boolean;
@@ -50,8 +48,6 @@ const Home = (
 
     return (
         <div className={`${showMovie ? "pl-0" : "md:pl-[160px] lg:pl-[180px] xl:pl-[200px]"}`}>
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/60
-             via-transparent to-transparent z-0"></div>
             <HeroSection
                 movie={featuredMovie}
                 showMovie={showMovie}
@@ -62,27 +58,6 @@ const Home = (
                 onChange={handleMovieSelect}
                 visibleItems={visibleItems}
             />
-
-            <div>
-            <CategorySection
-                categoryTitle="Popular"
-                categoryMovies={sortedTrendingMovies}
-                onChange={handleMovieSelect}
-                visibleItems={visibleItems}
-            />
-            <CategorySection
-                categoryTitle="Upcoming"
-                categoryMovies={sortedTrendingMovies}
-                onChange={handleMovieSelect}
-                visibleItems={visibleItems}
-            />
-            <CategorySection
-                categoryTitle="Top Picks For You"
-                categoryMovies={sortedTrendingMovies}
-                onChange={handleMovieSelect}
-                visibleItems={visibleItems}
-            />
-            </div>
         </div>
     );
 };
