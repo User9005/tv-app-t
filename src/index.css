@@ -35,23 +35,24 @@ body {
 
 @layer components {
     .hero-body {
-        @apply flex flex-col items-start gap-4 text-white h-full w-full px-[80px] pt-[100px] md: px-[90px] md:pr-16 md:pt-[130px] lg:pl-[96px] lg:pr-36 lg:pt-[168px] bg-cover bg-center relative z-10;
+        @apply flex flex-col items-start gap-4 text-white h-full w-full px-[80px] pt-[100px] md:px-[90px] md:pr-16 md:pt-[130px] lg:pl-[96px] lg:pr-36 lg:pt-[168px] bg-cover bg-center relative z-10;
     }
 
     .movie-category {
-        @apply text-[#858688] font-bold text-[18px] cursor-default leading-[28px] md: text-[20px] md:leading-[32px] lg:text-[24px] lg:leading-[42px];
+        @apply text-[#858688] text-gray-600
+        font-bold text-[18px] cursor-default leading-[28px] md:text-[20px] md:leading-[32px] lg:text-[24px] lg:leading-[42px];
     }
 
     .movie-title {
-        @apply text-[#FFFFFF] font-serif font-bold text-[28px] cursor-default leading-[38px] md: text-[36px] md:leading-[48px] lg:text-[48px] lg:leading-[64px];
+        @apply text-[#FFFFFF] font-serif font-bold text-[28px] cursor-default leading-[38px] md:text-[36px] md:leading-[48px] lg:text-[48px] lg:leading-[64px];
     }
 
     .movie-meta {
-        @apply text-[#F1F1F1] font-normal flex gap-2 text-[16px] cursor-default leading-[26px] md: text-[24px] md:leading-[34px] lg:text-[30px] lg:leading-[42px];
+        @apply text-[#F1F1F1] font-normal flex gap-2 text-[16px] cursor-default leading-[26px] md:text-[24px] md:leading-[34px] lg:text-[30px] lg:leading-[42px];
     }
 
     .movie-description {
-        @apply text-[#F1F1F1] font-normal cursor-default mb-[12px] md: mb-[18px] lg:mb-[24px] max-w-[802px] text-[16px] leading-[24px] md:text-[24px] md:leading-[34px] lg:text-[32px] lg:leading-[40px];
+        @apply text-[#F1F1F1] font-normal cursor-default mb-[12px] md:mb-[18px] lg:mb-[24px] max-w-[802px] text-[16px] leading-[24px] md:text-[24px] md:leading-[34px] lg:text-[32px] lg:leading-[40px];
     }
 
     .button-base {
@@ -59,30 +60,37 @@ body {
     }
 
     .button-primary {
-        @apply bg-[#F1F1F1] text-[#0C0C0C] border border-white w-[166px] h-[44px] text-[20px] md: w-[180px] md:h-[50px] md:text-[22px] lg:w-[240px] lg:h-[72px] lg:text-[32px] cursor-pointer;
+        @apply bg-[#F1F1F1] text-[#0C0C0C] border border-white w-[166px] h-[44px] text-[20px] md:w-[180px] md:h-[50px] md:text-[22px] lg:w-[240px] lg:h-[72px] lg:text-[32px] cursor-pointer;
     }
 
     .button-secondary {
-        @apply text-white w-[166px] h-[44px] text-[20px] md: w-[180px] md:h-[50px] md:text-[22px] lg:w-[240px] lg:h-[72px] lg:text-[32px] cursor-pointer;
+        @apply text-white w-[166px] h-[44px] text-[20px] md:w-[180px] md:h-[50px] md:text-[22px] lg:w-[240px] lg:h-[72px] lg:text-[32px] cursor-pointer;
         background: linear-gradient(90deg, #2733F5 0%, #001671 100%);
     }
+    .play-icon {
+        @apply max-sm:w-4.5 max-sm:h-4.5 
+               sm:w-5 sm:h-5 
+               md:w-6 md:h-6 
+               lg:w-7 lg:h-7
+               fill-[#0C0C0C];
+      }
 
     .sidebarHeader {
-        @apply flex items-center text-[20px] sm: text-[24px] md:text-[28px] lg:text-[32px] font-bold text-[#F1F1F1] tracking-[-0.01em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-[32px] sm:pt-[40px] md:pt-[48px] lg:pt-[60px] pl-[20px] sm:pl-[28px] md:pl-[32px] lg:pl-[38px] gap-4;
+        @apply flex items-center text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold text-[#F1F1F1] tracking-[-0.01em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-[32px] sm:pt-[40px] md:pt-[48px] lg:pt-[60px] pl-[20px] sm:pl-[28px] md:pl-[32px] lg:pl-[38px] gap-4;
     }
 
     .sidebarBody {
-        @apply flex flex-col items-center group-hover: items-start space-y-3 text-primary pt-[60px] pl-[24px] sm:pl-[32px] md:pl-[48px] lg:pl-[62px] text-[20px] sm:text-[24px] md:text-[30px] lg:text-[36px];
+        @apply flex flex-col items-center group-hover:items-start space-y-3 text-primary pt-[60px] pl-[24px] sm:pl-[32px] md:pl-[48px] lg:pl-[62px] text-[20px] sm:text-[24px] md:text-[30px] lg:text-[36px];
     }
 
 
     .sidebarItem {
-        @apply flex items-center gap-4 rounded-md overflow-hidden transition-colors duration-300 hover: bg-primary-dull hover:scale-105 w-[200px] h-[56px] text-[18px] px-3 py-2 sm:w-[220px] sm:h-[60px] sm:text-[20px] md:w-[260px] md:h-[64px] md:text-[22px] lg:w-[280px] lg:h-[68px] lg:text-[24px] xl:w-[320px] xl:h-[72px] xl:text-[28px];
+        @apply flex items-center gap-4 rounded-md overflow-hidden transition-colors duration-300 hover:bg-primary-dull hover:scale-105 w-[200px] h-[56px] text-[18px] px-3 py-2 sm:w-[220px] sm:h-[60px] sm:text-[20px] md:w-[260px] md:h-[64px] md:text-[22px] lg:w-[280px] lg:h-[68px] lg:text-[24px] xl:w-[320px] xl:h-[72px] xl:text-[28px];
     }
 
 
     .sidebarFooter {
-        @apply absolute max-sm: pb-10 bottom-[59px] max-md:bottom-[24px] left-[40px] flex flex-col gap-2 font-bold text-[#858688] leading-[36px] tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px];
+        @apply absolute max-sm:pb-10 bottom-[59px] max-md:bottom-[24px] left-[40px] flex flex-col gap-2 font-bold text-[#858688] leading-[36px] tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px];
     }
 }
 
