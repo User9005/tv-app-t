@@ -1,21 +1,35 @@
 import ReactPlayer from 'react-player';
 import type { MovieType } from '../types';
+import { ArrowLeft } from 'lucide-react';
 
-const Player = ({movie}:{movie: MovieType}) => {
+type PlayerProps = {
+    movie: MovieType;
+    closeMovie: () => void;
+}
+
+const Player = ({ movie, closeMovie } : PlayerProps) => {
 
     return (
-        <div style={{ position: 'relative', width: '100%' }}>
+        <section className="relative h-screen bg-black">
+            <button
+                onClick={() => closeMovie()}
+                className="absolute top-4 left-4 z-50 backdrop-blur-md p-2 rounded-full text-white cursor-pointer"
+            >
+                <ArrowLeft className="w-6 h-6" />
+            </button>
+
             <ReactPlayer
                 src={movie.VideoUrl}
-                style={{ position: 'absolute', top: 0, left: 0 }}
-                width="100%"
-                height="100%"
                 playing={true}
                 controls={false}
-                loop={true}
+                width="100%"
+                height="100%"
+                style={{ objectFit: "cover" }}
             />
-        </div>
+        </section>
     );
 };
 
 export default Player;
+
+

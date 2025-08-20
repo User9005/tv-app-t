@@ -1,13 +1,13 @@
-import { ArrowLeft, PlayIcon } from "lucide-react";
+import { PlayIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { getMovieTime } from "../lib/getMovieTime";
 import { getReleaseYear } from "../lib/getReleaseYear";
 import type { MovieType } from "../types";
 import { assets } from "../assets/assets";
-import ReactPlayer from "react-player";
 import { useEffect } from "react";
 import { getMovieTitle } from "../lib/getMovieTitle";
 import CategorySection from "./CategorySection";
+import Player from "./Player";
 
 type HeroSectionProps = {
     movie: MovieType | null;
@@ -46,25 +46,7 @@ const HeroSection = ({
     }
 
     if (showMovie && movie.VideoUrl) {
-        return (
-            <section className="relative h-screen bg-black">
-                <button
-                    onClick={() => closeMovie()}
-                    className="absolute top-4 left-4 z-50 backdrop-blur-md p-2 rounded-full text-white cursor-pointer"
-                >
-                    <ArrowLeft className="w-6 h-6" />
-                </button>
-
-                <ReactPlayer
-                    src={movie.VideoUrl}
-                    playing={true}
-                    controls={false}
-                    width="100%"
-                    height="100%"
-                    style={{ objectFit: "cover" }}
-                />
-            </section>
-        );
+        return  <Player movie={movie} closeMovie={closeMovie} />
     }
 
     return (
