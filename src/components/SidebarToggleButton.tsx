@@ -1,32 +1,36 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import useIsLandscapeMobile from '../hooks/useIsLandscapeMobile';
 
 type SidebarToggleButtonProps = {
   sidebarOpen: boolean;
   toggleSidebar: () => void;
 };
 
-const SidebarToggleButton: React.FC<SidebarToggleButtonProps> = ({
+const SidebarToggleButton = ({
   sidebarOpen,
   toggleSidebar,
-}) => {
+}: SidebarToggleButtonProps) => {
   const [showX, setShowX] = useState<boolean>(false);
+  const isLandscapeMobile = useIsLandscapeMobile();
 
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
     if (sidebarOpen) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setShowX(true);
       }, 50);
-
-      return () => clearTimeout(timer);
     } else {
       setShowX(false);
     }
+
+    return () => clearTimeout(timer);
   }, [sidebarOpen]);
 
   return (
     <button
-      className={`fixed ${sidebarOpen ? "top-6 left-50" : "top-6 left-6 "} z-50 md:hidden cursor-pointer`}
+      className={`fixed ${sidebarOpen ? "top-6 left-50" : "top-6 left-6 "} z-50 cursor-pointer ${!isLandscapeMobile && window.innerWidth >= 1024 ? "hidden" : ""}`}
       onClick={toggleSidebar}
       aria-label="Toggle sidebar"
     >
@@ -40,3 +44,16 @@ const SidebarToggleButton: React.FC<SidebarToggleButtonProps> = ({
 };
 
 export default SidebarToggleButton;
+
+
+
+
+
+
+
+
+
+
+
+
+

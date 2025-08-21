@@ -6,13 +6,15 @@ type CategorySectionProps = {
     categoryMovies: MovieType[];
     onChange: (movie: MovieType) => void;
     visibleItems: number
+    isLandscapeMobile: boolean
 }
 
 const CategorySection = ({
     categoryTitle,
     categoryMovies,
     onChange,
-    visibleItems
+    visibleItems,
+    isLandscapeMobile
 }: CategorySectionProps) => {
 
     const [cardSize, setCardSize] = useState<{ width: number; height?: number | string }>({
@@ -63,11 +65,13 @@ const CategorySection = ({
         return () => window.removeEventListener("resize", handleResize);
     }, [visibleItems]);
 
+    console.log('isLandscapeMobile:', isLandscapeMobile);
 
     return (
-        <div className={`w-full mt-8 sm:mt-12 md:mt-16 lg:mt-20 ${categoryTitle === "Trending Now" ? "max-sm:mt-15 sm:mt-30 md:mt-60 lg:pb-10" : ""}`} >
-            <h1 className="text-secondary sm:text-2xl md:text-3xl lg:text-[32px] font-semibold mb-4 max-sm:text-xl max-sm:my-5">
-                {categoryTitle}</h1>
+        <div className={`w-full mt-8 sm:mt-12 md:mt-16 lg:mt-20 ${(categoryTitle === "Trending Now" && !isLandscapeMobile) ? "max-sm:mt-15 sm:mt-30 md:mt-60 lg:pb-10" : ""}`}>
+            <h1 className={`text-secondary font-semibold mb-4 max-sm:my-5 
+                ${isLandscapeMobile ? 'text-xl' : 'sm:text-2xl md:text-3xl lg:text-[32px] max-sm:text-xl'}`}>
+            {categoryTitle}</h1>
 
             <div ref={carouselRef}
                 className="flex gap-4 no-scrollbar items-center overflow-x-scroll scroll-smooth"

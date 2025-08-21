@@ -9,6 +9,7 @@ type HomeProps = {
     showMovieNow: () => void;
     hideMovie: () => void;
     triggerDelayedShow: () => void;
+    isLandscapeMobile: boolean;
   };
 
 const Home = (
@@ -16,7 +17,8 @@ const Home = (
       showMovie,
       showMovieNow,
       hideMovie,
-      triggerDelayedShow
+      triggerDelayedShow,
+      isLandscapeMobile,
     } :  HomeProps ) => {
     const [movies] = useState<MovieData>(moviesData);
     const [storedMovieIds] = useState<number[]>(
@@ -47,7 +49,9 @@ const Home = (
     }
 
     return (
-        <div className={`${showMovie ? "pl-0" : "md:pl-[160px] lg:pl-[180px] xl:pl-[200px]"}`}>
+        <div
+         className={`${showMovie || isLandscapeMobile ? "pl-0" : "md:pl-[160px] lg:pl-[180px] xl:pl-[200px]"}`}
+         >
             <HeroSection
                 movie={featuredMovie}
                 showMovie={showMovie}
@@ -57,6 +61,7 @@ const Home = (
                 categoryMovies={sortedTrendingMovies}
                 onChange={handleMovieSelect}
                 visibleItems={visibleItems}
+                isLandscapeMobile={isLandscapeMobile}
             />
         </div>
     );

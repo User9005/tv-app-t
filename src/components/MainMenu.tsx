@@ -1,19 +1,16 @@
 import { Link } from 'react-router-dom'
 import { assets, navLinks } from '../assets/assets';
 import MenuItem from './MenuItem';
-import { useEffect, useState } from 'react';
-import SidebarToggleButton from './SidebarToggleButton';
+import { useEffect } from 'react';
+import useIsLandscapeMobile from '../hooks/useIsLandscapeMobile';
 
 type MainMenuProps = {
-    showMovie: boolean;
-  };
+    sidebarOpen: boolean;
+    setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const MainMenu = ({showMovie} : MainMenuProps) => {
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
-
-    const toggleSidebar = () => {
-        setSidebarOpen(prev => !prev);
-    }
+const MainMenu = ({sidebarOpen, setSidebarOpen} : MainMenuProps) => {
+    const isLandscapeMobile = useIsLandscapeMobile();
 
     useEffect(() => {
         if (sidebarOpen) {
@@ -27,57 +24,39 @@ const MainMenu = ({showMovie} : MainMenuProps) => {
         };
     }, [sidebarOpen]);
 
-    if (showMovie) return null; 
-
     return (
         <>
             <div className={`group relative h-full`}>
-                 <div
-                    className={`
-                    bg-gradient-to-r from-[#040404] to-[#040404]/80
-                    fixed top-0 left-0 z-50 h-screen overflow-y-auto
-                    ${sidebarOpen ? 'w-[250px]' : 'w-0'}        
-                    text-white transition-all duration-240 ease-in-out
-                    md:group-hover:w-[300px]
-                    md:w-[160px] lg:w-[180px] xl:w-[200px] md:overflow-visible
-                    xl:group-hover:w-[360px]
-                    lg:group-hover:w-[320px]
-                    items-center group-hover:items-start
-                    min-h-screen`}>
 
-                    <div className="flex flex-col px-4">
+                <div className={`sidebar no-scrollbar
+                     ${sidebarOpen && isLandscapeMobile ? 'min-w-[250px]' : ''}
+                     ${sidebarOpen && !isLandscapeMobile ? 'max-md:w-[250px]' : 'max-md:w-0'}`}>
+
+                    <div className={`flex flex-col px-4`}>
                         {/* Profile */}
-                        <div className={`sidebarHeader ${sidebarOpen && "opacity-100 transition-opacity duration-1000"} md:mb-[47px]`}>
-                            <img
-                                className="w-21 h-21 rounded-full object-cover -ml-7 sm:-ml-8 md:-ml-10 lg:-ml-12 
-                                "
+                        <div className={`sidebarHeader ${sidebarOpen && "opacity-100 transition-opacity duration-200"} md:mb-[30px]`}>
+                            <img className="w-21 h-21 rounded-full object-cover -ml-7 sm:-ml-8 md:-ml-10 lg:-ml-12"
                                 src={assets.profileImage}
                                 alt="Profile Image"
                             />
-                            <span className="text-white">Daniel</span>
+                            <span>Daniel</span>
                         </div>
 
                         {/* Menu Items */}
-                        <div className='.sidebarBody'>
+                        <div className={`sidebarBody`}>
                             {navLinks.map((link, index) => (
                                 <MenuItem key={index} {...link} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
                             ))}
                         </div>
 
                         {/* Footer links  */}
-                        <div className={`sidebarFooter ${sidebarOpen && "opacity-100 transition-opacity duration-300"}`}>
+                        <div className={`sidebarFooter ${sidebarOpen && "opacity-100 transition-opacity duration-300"} ${isLandscapeMobile ? "hidden" : ""} `}>
                             <Link onClick={() => { setSidebarOpen(false) }} to="/language">Language</Link>
                             <Link onClick={() => { setSidebarOpen(false) }} to="/privacy">Privacy</Link>
                             <Link onClick={() => { setSidebarOpen(false) }} to="/terms">Terms</Link>
                         </div>
-                        
                     </div>
                 </div>
-
-                <SidebarToggleButton
-                    sidebarOpen={sidebarOpen}
-                    toggleSidebar={toggleSidebar}
-                />
 
             </div>
         </>

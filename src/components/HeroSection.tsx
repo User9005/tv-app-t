@@ -18,6 +18,7 @@ type HeroSectionProps = {
     categoryMovies: MovieType[];
     onChange: (movie: MovieType) => void;
     visibleItems: number;
+    isLandscapeMobile: boolean
 };
 
 const HeroSection = ({
@@ -28,7 +29,8 @@ const HeroSection = ({
     categoryTitle,
     categoryMovies,
     onChange,
-    visibleItems
+    visibleItems,
+    isLandscapeMobile
 }: HeroSectionProps) => {
     if (!movie) return null;
 
@@ -60,7 +62,19 @@ const HeroSection = ({
              {/* Mask as an effect & to make text more readable   */}
             <div className="fixed inset-0 pointer-events-none bg-gradient-to-b from-[#0C0C0C] to-transparent opacity-40" />
 
-            <div className="hero-body px-4 sm:px-[90px] md:px-24 pt-[100px] md:pt-[130px] lg:pt-[168px]">
+            <div 
+
+            // className={`hero-body px-4 sm:px-[90px] md:px-24 
+            // ${isLandscapeMobile ? "" : "pt-[100px] md:pt-[130px] lg:pt-[168px]"}
+            // `}
+
+
+            className={`hero-body px-4 sm:px-[90px] md:px-24 pt-[100px] md:pt-[130px] lg:pt-[168px]
+            ${isLandscapeMobile ? "-mt-20" : "" }
+            `}
+
+
+            >
 
                 <h1 className="movie-category">{movie.Category}</h1>
 
@@ -104,6 +118,7 @@ const HeroSection = ({
                     categoryMovies={categoryMovies}
                     onChange={onChange}
                     visibleItems={visibleItems}
+                    isLandscapeMobile={isLandscapeMobile}
                 />
             </div>
 
